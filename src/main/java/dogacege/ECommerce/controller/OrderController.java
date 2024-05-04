@@ -1,5 +1,6 @@
 package dogacege.ECommerce.controller;
 
+import dogacege.ECommerce.dto.OrderDto;
 import dogacege.ECommerce.entity.Order;
 import dogacege.ECommerce.entity.User;
 import dogacege.ECommerce.service.OrderService;
@@ -30,12 +31,7 @@ public class OrderController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Object> addOrder(@RequestBody Order order){
-        try {
-            Order addedOrder = orderService.addOrder(order);
-            return ResponseEntity.status(HttpStatus.CREATED).body(addedOrder);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Order girilirken bir hata oluştu.");
-        }
+    public Order addOrder(@RequestBody OrderDto orderDto){
+        return orderService.addOrder(orderDto);
     }
 }
