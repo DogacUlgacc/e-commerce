@@ -37,4 +37,13 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Kullanıcı eklenirken bir hata oluştu.");
         }
     }
+    @PutMapping("/{userId}")
+    public User updateUser(@PathVariable Long userId, @RequestBody User newUser) {
+        newUser.setUserId(userId); // Yeni kullanıcının kimliğini ayarla
+        return userService.updateUser(newUser);
+    }
+    @DeleteMapping("/{userId}")
+    public void deleteUserById(@PathVariable Long userId){
+         userService.deleteUserById(userId);
+    }
 }

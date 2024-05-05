@@ -1,6 +1,6 @@
 package dogacege.ECommerce.dto;
 
-import dogacege.ECommerce.entity.Order;
+
 import lombok.Data;
 
 import java.util.Date;

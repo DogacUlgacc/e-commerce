@@ -29,7 +29,6 @@ public class OrderItemController {
         return orderItemService.getAllOrderItem();
     }
 
-
     @PutMapping("/{id}")
     public ResponseEntity<OrderItem> updateOrderItem(@PathVariable Long id, @RequestBody OrderItem updatedOrderItem) {
         OrderItem orderItem = orderItemService.updateOrderItem(id, updatedOrderItem);

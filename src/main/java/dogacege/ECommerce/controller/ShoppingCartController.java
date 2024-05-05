@@ -30,4 +30,14 @@ public class ShoppingCartController {
     public ShoppingCart addProductToChart(@RequestBody ShoppingCartDto shoppingCartDto){
         return shoppingCartService.addProductToChart(shoppingCartDto);
     }
+
+    @PutMapping("/{cartId}")
+    public ShoppingCart updateShoppingCart(@RequestBody ShoppingCartDto shoppingCartDto,@PathVariable Long cartId){
+        return shoppingCartService.updateShoppingCart(shoppingCartDto,cartId);
+    }
+
+    @DeleteMapping("/{cartId}")
+    public void deleteShoppingCart(@PathVariable Long cartId){
+        shoppingCartService.deleteShoppingCart(cartId);
+    }
 }

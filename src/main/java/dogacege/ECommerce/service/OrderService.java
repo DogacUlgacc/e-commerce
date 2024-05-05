@@ -7,6 +7,7 @@ import dogacege.ECommerce.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -34,5 +35,29 @@ public class OrderService {
         User user = userService.getUserById(orderDto.getUserId());
         order.setUser(user);
         return orderRepository.save(order);
+    }
+
+    public void deleteOrderById(Long orderId) {
+        orderRepository.deleteById(orderId);
+    }
+
+    public Order updateOrder(Order newOrder) {
+        // Orderın kimliğini al
+        Long orderId = newOrder.getOrderId();
+
+        // Veritabanından mevcut Orderın al
+        Optional<Order> existinOrderOptional = orderRepository.findById(orderId);
+        if (existinOrderOptional.isPresent()) {
+            // Mevcut Orderın al
+            Order existingOrder = existinOrderOptional.get();
+
+            // Yeni bilgilerle mevcut Orderın güncelle
+            existingOrder.setTotalAmount(newOrder.getTotalAmount());
+            // Güncellenmiş Orderın veritabanına kaydet
+            return orderRepository.save(existingOrder);
+        } else {
+            // Orderın bulunamadı, null dön
+            return null;
+        }
     }
 }

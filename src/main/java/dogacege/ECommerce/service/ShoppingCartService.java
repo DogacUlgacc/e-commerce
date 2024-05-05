@@ -9,10 +9,10 @@ import dogacege.ECommerce.repository.ShoppingCartRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ShoppingCartService {
-
     private final ShoppingCartRepository shoppingCartRepository;
     private final UserService userService;
     private final ProductService productService;
@@ -41,5 +41,23 @@ public class ShoppingCartService {
         cart.setProduct(product);
         cart.setUser(user);
         return shoppingCartRepository.save(cart);
+    }
+
+    public void deleteShoppingCart(Long cartId) {
+        shoppingCartRepository.deleteById(cartId);
+    }
+
+    public ShoppingCart updateShoppingCart(ShoppingCartDto shoppingCartDto, Long cartId) {
+        ShoppingCart shoppingCart = shoppingCartRepository.getReferenceById(cartId);
+
+        Long userId = shoppingCartDto.getUserId();
+        Long productId = shoppingCartDto.getProductId();
+
+        shoppingCart.setQuantity(shoppingCartDto.getQuantity());
+        shoppingCart.setProduct(productService.getProductById(productId));
+        shoppingCart.setUser(userService.getUserById(userId));
+
+        return shoppingCartRepository.save(shoppingCart);
+
     }
 }

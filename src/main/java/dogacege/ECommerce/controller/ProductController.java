@@ -37,5 +37,15 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Product eklenirken bir hata oluştu.");
         }
     }
+    @PutMapping("/{productId}")
+    public Product updateProduct(@RequestBody Product newProduct, @PathVariable Long productId){
+        newProduct.setProductId(productId);
+        return productService.updateProduct(newProduct);
+    }
+    @DeleteMapping("{productId}")
+    public void deleteProductById(@PathVariable Long productId){
+        productService.deleteProductById(productId);
+
+    }
 
 }
