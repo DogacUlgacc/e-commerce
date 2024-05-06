@@ -1,6 +1,8 @@
 package dogacege.ECommerce.service;
 
+import dogacege.ECommerce.entity.ShoppingCart;
 import dogacege.ECommerce.entity.User;
+import dogacege.ECommerce.repository.ShoppingCartRepository;
 import dogacege.ECommerce.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +13,9 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-
-    public UserService(UserRepository userRepository) {
+    private final ShoppingCartRepository shoppingCartRepository;
+    public UserService(UserRepository userRepository, ShoppingCartRepository shoppingCartRepository) {
+        this.shoppingCartRepository = shoppingCartRepository;
         this.userRepository = userRepository;
     }
 
@@ -27,7 +30,11 @@ public class UserService {
     }
 
     public User addUser(User user) {
-        return userRepository.save(user);
+        ShoppingCart shoppingCart = new ShoppingCart();
+        userRepository.save(user); // User nesnesini veritabanına kaydet
+        shoppingCart.setUser(user);
+        shoppingCartRepository.save(shoppingCart);
+        return user;
     }
 
     public void deleteUserById(Long userId) {
