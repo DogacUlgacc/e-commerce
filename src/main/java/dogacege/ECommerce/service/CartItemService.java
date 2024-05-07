@@ -32,5 +32,6 @@ public class CartItemService {
         cartItem.setQuantity(cartItem.getQuantity());
    /*     cartItem.setShoppingCart();
         cartItem.setProduct();*/
+    return cartItemRepository.save(cartItem);
     }
 }
