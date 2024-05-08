@@ -22,6 +22,8 @@ public class ShoppingCartService {
         this.productService = productService;
     }
 
+
+
     public List<ShoppingCart> getAllShoppingCart() {
         return shoppingCartRepository.findAll();
     }
@@ -58,5 +60,10 @@ public class ShoppingCartService {
 
         return shoppingCartRepository.save(shoppingCart);
 
+    }
+
+
+    public ShoppingCart getShoppingCartWithItems(Long cartId) {
+        return shoppingCartRepository.findShoppingCartWithItems(cartId);
     }
 }

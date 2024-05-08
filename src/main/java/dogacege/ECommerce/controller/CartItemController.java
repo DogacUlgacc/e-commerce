@@ -31,4 +31,8 @@ public class CartItemController {
     public CartItem createCartItem(@RequestBody CartItemDto cartItemDto,@PathVariable Long userId){
         return cartItemService.createCartItem(cartItemDto,userId);
     }
+    @PostMapping("/add")
+    public CartItem createItem(@RequestBody CartItem cartItem){
+        return cartItemService.createItem(cartItem);
+    }
 }

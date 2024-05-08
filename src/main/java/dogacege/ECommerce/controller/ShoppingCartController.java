@@ -21,8 +21,8 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/{cartId}")
-    public ShoppingCart getShoppingChartById(@PathVariable Long cartId){
-        return shoppingCartService.getShoppingChartById(cartId);
+    public ShoppingCart getShoppingCartWithItems(@PathVariable Long cartId) {
+        return shoppingCartService.getShoppingCartWithItems(cartId);
     }
 
     @PostMapping("/add")
@@ -39,4 +39,8 @@ public class ShoppingCartController {
     public void deleteShoppingCart(@PathVariable Long cartId){
         shoppingCartService.deleteShoppingCart(cartId);
     }
+
+
 }
+
+

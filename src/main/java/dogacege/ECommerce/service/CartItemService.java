@@ -41,4 +41,8 @@ public class CartItemService {
 
         return cartItemRepository.save(cartItem);
     }
+
+    public CartItem createItem(CartItem cartItem) {
+    return cartItemRepository.save(cartItem);
+    }
 }
