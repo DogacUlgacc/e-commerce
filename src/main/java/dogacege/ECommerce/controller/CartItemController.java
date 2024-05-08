@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cartItem")
+@RequestMapping("/cart-item")
 public class CartItemController {
 
     private final CartItemService cartItemService ;
@@ -27,8 +27,8 @@ public class CartItemController {
         return cartItemService.getAllCartItemsById(cartItemsId);
     }
 
-    @PostMapping("/add")
-    public CartItem createCartItem(@RequestBody CartItemDto cartItemDto){
-        return cartItemService.createCartItem(cartItemDto);
+    @PostMapping("/add/{userId}")
+    public CartItem createCartItem(@RequestBody CartItemDto cartItemDto,@PathVariable Long userId){
+        return cartItemService.createCartItem(cartItemDto,userId);
     }
 }

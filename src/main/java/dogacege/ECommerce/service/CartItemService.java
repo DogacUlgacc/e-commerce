@@ -13,9 +13,14 @@ import java.util.List;
 public class CartItemService {
 
     private final CartItemRepository cartItemRepository;
+    private final ShoppingCartService shoppingCartService;
+    private final ProductService productService;
 
-    public CartItemService(CartItemRepository cartItemRepository) {
+    public CartItemService(CartItemRepository cartItemRepository, ShoppingCartService shoppingCartService, ProductService productService) {
         this.cartItemRepository = cartItemRepository;
+
+        this.shoppingCartService = shoppingCartService;
+        this.productService = productService;
     }
 
     public List<CartItem> getAllCartItems() {
@@ -26,12 +31,14 @@ public class CartItemService {
         return cartItemRepository.getReferenceById(cartItemsId);
     }
 
-    public CartItem createCartItem(CartItemDto cartItemDto) {
+    public CartItem createCartItem(CartItemDto cartItemDto, Long userId) {
         CartItem cartItem  = new CartItem();
-        ShoppingCart shoppingCart = new ShoppingCart();
-        cartItem.setQuantity(cartItem.getQuantity());
-   /*     cartItem.setShoppingCart();
-        cartItem.setProduct();*/
-    return cartItemRepository.save(cartItem);
+        ShoppingCart shoppingCart = shoppingCartService.getShoppingChartById(userId);
+
+        cartItem.setQuantity(cartItemDto.getQuantity());
+        cartItem.setShoppingCart(shoppingCart);
+        cartItem.setProduct(productService.getProductById(cartItemDto.getProductId()));
+
+        return cartItemRepository.save(cartItem);
     }
 }
