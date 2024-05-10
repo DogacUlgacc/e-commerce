@@ -33,7 +33,7 @@ public class CartItemService {
 
     public CartItem createCartItem(CartItemDto cartItemDto, Long userId) {
         CartItem cartItem  = new CartItem();
-        ShoppingCart shoppingCart = shoppingCartService.getShoppingChartById(userId);
+        ShoppingCart shoppingCart = shoppingCartService.getShoppingCartById(userId);
 
         cartItem.setQuantity(cartItemDto.getQuantity());
         cartItem.setShoppingCart(shoppingCart);
@@ -45,4 +45,11 @@ public class CartItemService {
     public CartItem createItem(CartItem cartItem) {
     return cartItemRepository.save(cartItem);
     }
+
+    public void deleteCartItemsByShoppingCartId(Long shoppingCartId) {
+        List<CartItem> cartItems = cartItemRepository.findByShoppingCartId(shoppingCartId);
+        cartItemRepository.deleteAll(cartItems);
+    }
+
+
 }

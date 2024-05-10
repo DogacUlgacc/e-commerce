@@ -28,8 +28,11 @@ public class ShoppingCartService {
         return shoppingCartRepository.findAll();
     }
 
-    public ShoppingCart getShoppingChartById(Long cartId) {
+    public ShoppingCart getShoppingCartById(Long cartId) {
         return shoppingCartRepository.findById(cartId).orElse(null);
+    }
+    public ShoppingCart getShoppingCartByUserId(Long userId) {
+        return shoppingCartRepository.findByUserId(userId);
     }
 
     public ShoppingCart addProductToChart(ShoppingCartDto shoppingCartDto) {

@@ -35,4 +35,10 @@ public class CartItemController {
     public CartItem createItem(@RequestBody CartItem cartItem){
         return cartItemService.createItem(cartItem);
     }
+
+    @DeleteMapping("/deleteAll/{shoppingCartId}")
+    public boolean deleteAllCartItemsByShoppingCartId(@PathVariable Long shoppingCartId) {
+        cartItemService.deleteCartItemsByShoppingCartId(shoppingCartId);
+        return true;
+    }
 }
