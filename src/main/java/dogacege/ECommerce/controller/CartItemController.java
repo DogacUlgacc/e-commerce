@@ -36,6 +36,12 @@ public class CartItemController {
         return cartItemService.createItem(cartItem);
     }
 
+    @PutMapping("/updateQuantity/{cartItemId}")
+    public CartItem updateCartItemQuantity(@PathVariable Long cartItemId, @RequestParam int quantity){
+        return cartItemService.updateCartItemQuantity(cartItemId, quantity);
+    }
+
+
     @DeleteMapping("/deleteAll/{shoppingCartId}")
     public boolean deleteAllCartItemsByShoppingCartId(@PathVariable Long shoppingCartId) {
         cartItemService.deleteCartItemsByShoppingCartId(shoppingCartId);
