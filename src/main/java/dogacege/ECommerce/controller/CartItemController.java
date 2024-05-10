@@ -47,4 +47,8 @@ public class CartItemController {
         cartItemService.deleteCartItemsByShoppingCartId(shoppingCartId);
         return true;
     }
+    @DeleteMapping("/delete/{cartItemId}")
+    public void deleteCartItemById(@PathVariable Long cartItemId){
+        cartItemService.deleteCartItemById(cartItemId);
+    }
 }

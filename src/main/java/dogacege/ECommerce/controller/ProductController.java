@@ -47,5 +47,10 @@ public class ProductController {
         productService.deleteProductById(productId);
 
     }
+    @GetMapping("/images/{productId}")
+    public String getProductImageUrl(@PathVariable Long productId){
+        System.out.println(productService.getProductById(productId).getImageUrl());
+        return productService.getProductById(productId).getImageUrl();
+    }
 
 }
