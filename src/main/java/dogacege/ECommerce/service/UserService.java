@@ -1,7 +1,9 @@
 package dogacege.ECommerce.service;
 
+import dogacege.ECommerce.entity.CartItem;
 import dogacege.ECommerce.entity.ShoppingCart;
 import dogacege.ECommerce.entity.User;
+import dogacege.ECommerce.repository.CartItemRepository;
 import dogacege.ECommerce.repository.ShoppingCartRepository;
 import dogacege.ECommerce.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -14,9 +16,12 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final ShoppingCartRepository shoppingCartRepository;
-    public UserService(UserRepository userRepository, ShoppingCartRepository shoppingCartRepository) {
+    private final CartItemRepository cartItemRepository;
+
+    public UserService(UserRepository userRepository, ShoppingCartRepository shoppingCartRepository, CartItemRepository cartItemRepository) {
         this.shoppingCartRepository = shoppingCartRepository;
         this.userRepository = userRepository;
+        this.cartItemRepository = cartItemRepository;
     }
 
 
@@ -38,6 +43,16 @@ public class UserService {
     }
 
     public void deleteUserById(Long userId) {
+        var shoppingCart = shoppingCartRepository.findByUserId(userId);
+        if (shoppingCart != null) {
+            var id = shoppingCart.getShoppingCartId();
+            if (id != null) {
+                List<CartItem> cartItems = cartItemRepository.findByShoppingCartId(id);
+                cartItemRepository.deleteAll(cartItems);
+                shoppingCartRepository.deleteById(shoppingCart.getShoppingCartId());
+
+            }
+        }
         userRepository.deleteById(userId);
     }
 
