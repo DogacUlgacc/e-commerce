@@ -49,6 +49,7 @@ public class ProductService {
             existingProduct.setDescription(newProduct.getDescription());
             existingProduct.setPrice(newProduct.getPrice());
             existingProduct.setQuantity(newProduct.getQuantity());
+            existingProduct.setImageUrl(newProduct.getImageUrl());
             // Güncellenmiş product veritabanına kaydet
             return productRepository.save(existingProduct);
         } else {
