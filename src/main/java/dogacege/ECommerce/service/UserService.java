@@ -65,10 +65,6 @@ public class UserService {
         if (existingUserOptional.isPresent()) {
             // Mevcut kullanıcıyı al
             User existingUser = existingUserOptional.get();
-
-            // Yeni bilgilerle mevcut kullanıcıyı güncelle
-           /* existingUser.setUsername(newUser.getUsername());  // İSİM SOYİSİM DEĞİŞTİRME??
-            existingUser.setSurname(newUser.getSurname());*/
             existingUser.setEmail(newUser.getEmail());
             existingUser.setPassword(newUser.getPassword());
             existingUser.setAddress(newUser.getAddress());

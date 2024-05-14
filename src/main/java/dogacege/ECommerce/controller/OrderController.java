@@ -25,10 +25,12 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
-    @GetMapping("{orderId}")
-    public Order getOrderById(@PathVariable Long orderId){
-        return orderService.getOrderById(orderId);
+    @GetMapping("{userId}")
+    public List<Order> getOrdersByUserId(@PathVariable Long userId){
+        return orderService.getOrderByUserId(userId);
     }
+
+
 
     @PostMapping("/add")
     public Order addOrder(@RequestBody OrderDto orderDto){

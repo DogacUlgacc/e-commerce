@@ -70,7 +70,7 @@ public class AuthenticationService {
 
 
         Map<String, Object> claims = new HashMap<>();
-        // Add user ID as a claim
+
         claims.put("id", (user).getUserId());
 
         var jwtToken = jwtService.generateToken(claims,user);

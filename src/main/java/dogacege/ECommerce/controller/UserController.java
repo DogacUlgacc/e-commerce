@@ -39,7 +39,7 @@ public class UserController {
     }
     @PutMapping("/{userId}")
     public User updateUser(@PathVariable Long userId, @RequestBody User newUser) {
-        newUser.setUserId(userId); // Yeni kullanıcının kimliğini ayarla
+        newUser.setUserId(userId);
         return userService.updateUser(newUser);
     }
     @DeleteMapping("/{userId}")

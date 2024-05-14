@@ -23,8 +23,8 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "images/**").permitAll() //except this endpoints
-                        .anyRequest().authenticated() // all should be authenticated
+                        .requestMatchers("/auth/**", "images/**").permitAll()
+                        .anyRequest().authenticated()
 
 
                 )

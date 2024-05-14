@@ -1,11 +1,14 @@
 package dogacege.ECommerce.service;
 
 import dogacege.ECommerce.dto.OrderDto;
-import dogacege.ECommerce.entity.Order;
-import dogacege.ECommerce.entity.User;
+import dogacege.ECommerce.dto.ShoppingCartDto;
+import dogacege.ECommerce.entity.*;
 import dogacege.ECommerce.repository.OrderRepository;
+import dogacege.ECommerce.repository.ShoppingCartRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,10 +18,12 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final UserService userService;
 
-    public OrderService(OrderRepository orderRepository, UserService userService) {
+    public OrderService(OrderRepository orderRepository, UserService userService, ShoppingCartService shoppingCartService, CartItemService cartItemService) {
         this.orderRepository = orderRepository;
         this.userService = userService;
+
     }
+
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
@@ -29,35 +34,54 @@ public class OrderService {
 
     public Order addOrder(OrderDto orderDto) {
         Order order = new Order();
-        order.setOrderDate(orderDto.getOrderDate());
-        order.setStatus(orderDto.getStatus());
-        order.setTotalAmount(orderDto.getTotalAmount());
+
         User user = userService.getUserById(orderDto.getUserId());
         order.setUser(user);
+
+        List<OrderItem> orderItems = new ArrayList<>();
+        for (CartItem cartItem : orderDto.getCartItems()) {
+            OrderItem orderItem = new OrderItem();
+            orderItem.setProduct(cartItem.getProduct());
+            orderItem.setQuantity(cartItem.getQuantity());
+            orderItem.setOrder(order);
+            orderItems.add(orderItem);
+        }
+
+        order.setOrderItems(orderItems);
+
+        order.setTotalAmount(orderDto.getTotalAmount());
+
         return orderRepository.save(order);
     }
+
 
     public void deleteOrderById(Long orderId) {
         orderRepository.deleteById(orderId);
     }
 
     public Order updateOrder(Order newOrder) {
-        // Orderın kimliğini al
+
         Long orderId = newOrder.getOrderId();
 
-        // Veritabanından mevcut Orderın al
+
         Optional<Order> existinOrderOptional = orderRepository.findById(orderId);
         if (existinOrderOptional.isPresent()) {
-            // Mevcut Orderın al
+
             Order existingOrder = existinOrderOptional.get();
 
-            // Yeni bilgilerle mevcut Orderın güncelle
+
             existingOrder.setTotalAmount(newOrder.getTotalAmount());
-            // Güncellenmiş Orderın veritabanına kaydet
+
             return orderRepository.save(existingOrder);
         } else {
-            // Orderın bulunamadı, null dön
+
             return null;
         }
+    }
+
+    public List<Order> getOrderByUserId(Long userId) {
+
+        return orderRepository.findByUserId(userId);
+
     }
 }

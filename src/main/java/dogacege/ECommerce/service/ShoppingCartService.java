@@ -37,12 +37,11 @@ public class ShoppingCartService {
 
     public ShoppingCart addProductToChart(ShoppingCartDto shoppingCartDto) {
         ShoppingCart cart = new ShoppingCart();
-       // cart.setQuantity(shoppingCartDto.getQuantity());
+
 
         User user = userService.getUserById(shoppingCartDto.getUserId());
         Product product = productService.getProductById(shoppingCartDto.getProductId());
 
-//cart.setProduct(product);
         cart.setUser(user);
         return shoppingCartRepository.save(cart);
     }
@@ -57,8 +56,7 @@ public class ShoppingCartService {
         Long userId = shoppingCartDto.getUserId();
         Long productId = shoppingCartDto.getProductId();
 
-       /* shoppingCart.setQuantity(shoppingCartDto.getQuantity());
-        shoppingCart.setProduct(productService.getProductById(productId));*/
+
         shoppingCart.setUser(userService.getUserById(userId));
 
         return shoppingCartRepository.save(shoppingCart);

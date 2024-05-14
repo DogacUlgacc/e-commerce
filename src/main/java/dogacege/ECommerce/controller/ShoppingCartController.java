@@ -20,10 +20,6 @@ public class ShoppingCartController {
         return shoppingCartService.getAllShoppingCart();
     }
 
-//    @GetMapping("/{cartId}")
-//    public ShoppingCart getShoppingCartWithItems(@PathVariable Long cartId) {
-//        return shoppingCartService.getShoppingCartWithItems(cartId);
-//    }
 
     @GetMapping("/{userId}")
     public ShoppingCart getShoppingCartWithUserId(@PathVariable Long userId) {
