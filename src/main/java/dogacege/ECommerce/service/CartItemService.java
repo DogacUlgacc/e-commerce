@@ -35,7 +35,7 @@ public class CartItemService {
 
     public CartItem createCartItem(CartItemDto cartItemDto, Long userId) {
         CartItem cartItem = new CartItem();
-        ShoppingCart shoppingCart = shoppingCartService.getShoppingCartById(userId);
+        ShoppingCart shoppingCart = shoppingCartService.getShoppingCartByUserId(userId);
 
         cartItem.setQuantity(cartItemDto.getQuantity());
         cartItem.setShoppingCart(shoppingCart);

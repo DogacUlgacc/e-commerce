@@ -27,7 +27,7 @@ public class ShoppingCartController {
 
     @GetMapping("/{userId}")
     public ShoppingCart getShoppingCartWithUserId(@PathVariable Long userId) {
-        return shoppingCartService.getShoppingCartWithItems(userId);
+        return shoppingCartService.getShoppingCartByUserId(userId);
     }
 
     @PostMapping("/add")
