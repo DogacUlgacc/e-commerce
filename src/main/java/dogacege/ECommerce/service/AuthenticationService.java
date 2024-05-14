@@ -42,7 +42,6 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword())) // save encoded password to the db
                 .address(request.getAddress())
                 .role(Role.USER)
-
                 .build();
 
         repository.save(user); // User nesnesini veritabanına kaydet
