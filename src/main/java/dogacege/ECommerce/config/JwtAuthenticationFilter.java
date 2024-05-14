@@ -41,7 +41,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         jwt = authHeader.substring(7);
         userEmail = jwtService.extractUsername(jwt);// todo extract the userEmail from jwt
 
-        logger.info(userEmail + "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSs");
 
         //user is not authenticated
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {

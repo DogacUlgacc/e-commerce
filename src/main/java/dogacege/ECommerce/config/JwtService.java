@@ -27,7 +27,9 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails userDetails) {
+
         //without extra claims
+
         return generateToken(new HashMap<>(), userDetails);
     }
 
@@ -41,7 +43,7 @@ public class JwtService {
                 .compact(); // generates the token
     }
 
-    public boolean isTokenValid(String token, UserDetails userDetails){
+    public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
